@@ -1,6 +1,9 @@
-<h1>HL7 C-CDA Viewer</h1>
+<h1>Basic C-CDA Viewer Site </h1>
 
 <h2>Synopsis</h2>
+This project is a basic viewer/listing tool built on top of the original C-CDA viewer, combined with a file lister and modified to log access with the intent of HIPAA compliance.
+
+Original:
 Easy to use rendering of complex C-CDA documents directly in any web browser.
 Responsive document layout automatically adjusts to make optimum use of the available screen space.
 Users can hide, collapse and move any section of a CDA document.
