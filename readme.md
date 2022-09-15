@@ -5,6 +5,8 @@
 <p>To install, bind the webroot of your IIS site to the Site directory, and change authentication to windows authentication, then remove the default authorization rule for everyone and add a new rule for your specific group in order to filter to the group you want to allow access for.</p>
 <p>For logging to work, modify the Access Logging directory permissions to include the group allowed to authenticate to the site.</p>
 
+<img src="https://github.com/bahusafoo/C-CDA_Viewer/blob/master/C-CDA_ViewerSite.png?raw=true" />
+
 <p>Original viewer description (still mostly applies):</p>
 Easy to use rendering of complex C-CDA documents directly in any web browser.
 Responsive document layout automatically adjusts to make optimum use of the available screen space.
