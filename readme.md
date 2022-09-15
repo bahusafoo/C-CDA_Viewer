@@ -1,11 +1,11 @@
 <h1>Basic C-CDA Viewer Site </h1>
 
 <h2>Synopsis</h2>
-This project is a basic viewer/listing tool built on top of the original C-CDA viewer, combined with a file lister and modified to log access with the intent of HIPAA compliance.
-<p>To install, bind the webroot of your IIS site to the Site directory, and change authentication to windows authentication.  Filter to the group you want to allow access for.</p>
-<p>For logging to work, modify the Access Logging directory permissions to include the group allowed to authenticate to the site</p>
+<p>This project is a basic viewer/listing tool built on top of the original C-CDA viewer, combined with a file lister and modified to log access with the intent of HIPAA compliance - you will need to validate compliance on your own.</p>
+<p>To install, bind the webroot of your IIS site to the Site directory, and change authentication to windows authentication, then remove the default authorization rule for everyone and add a new rule for your specific group in order to filter to the group you want to allow access for.</p>
+<p>For logging to work, modify the Access Logging directory permissions to include the group allowed to authenticate to the site.</p>
 
-Original:
+<p>Original viewer description (still mostly applies):</p>
 Easy to use rendering of complex C-CDA documents directly in any web browser.
 Responsive document layout automatically adjusts to make optimum use of the available screen space.
 Users can hide, collapse and move any section of a CDA document.
