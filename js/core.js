@@ -88,6 +88,7 @@ function loadcontents(data,reponame,owner,path){
 	})
 }
 function init(){
+	
 	sectionorder=[];
 	$('li.toc[data-code]').each(function(){
 		sectionorder.push($(this).attr('data-code'))
@@ -309,7 +310,6 @@ function init(){
 		}
 		
 		//jquery $('#viewcda').xslt(cdaxml, './cda.xsl');
-		
 		new Transformation().setXml(cdaxml).setXslt('cda.xsl').transform("viewcda");
 		//$('#inputcda').hide(function(){
 			//$('#viewcda').show(function(){
