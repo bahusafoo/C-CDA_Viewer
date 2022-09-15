@@ -1,13 +1,14 @@
 <?php
     $SearchFilter2 = $_GET['SearchFilter2'];
-    //$SearchFilter2 = $_REQUEST["SearchFilter2"];
+    $SolutionVersion = "22.9.15.8";
     $AccessLog = "../Access Logs/AccessLog.log";
     $AccessUser = get_current_user();
     date_default_timezone_set("America/Chicago");
-    function logAction(string $Message) {
-        global $AccessLog, $AccessUser;
+    function logAction(string $Message)
+    {
+        global $AccessLog, $AccessUser, $SolutionVersion;
         $AccessTimeStamp = date("Y-m-d h:i:sa");
-        file_put_contents("../Access Logs/$AccessLog", "[ $AccessTimeStamp ] Username \"$AccessUser\" $Message.",  FILE_APPEND | LOCK_EX);
+        file_put_contents("../Access Logs/$AccessLog", "[ $AccessTimeStamp ] [ $SolutionVersion ] Username \"$AccessUser\" $Message.\r\n", FILE_APPEND | LOCK_EX);
     }
     ?>
 <!DOCTYPE html>
@@ -57,22 +58,20 @@
 		<div class="custom-wrapper pure-g home-menu pure-menu pure-menu-fixed" style="width:100%" id="men">
 			<div class="pure-u-1">
 				<span class="pure-button viewbtn" id="inputcdabtn" id_target="inputcda" style="float:right;display:block"><i class="fa fa-lg fa-file-code-o"></i> Back to Home</span>
-				<a href="index.php" class="" style="float:left;font-weight:bold;font-size:1.75em;;padding-top:0.2em;padding-bottom:0.5em;text-decoration:none">Legacy EMR Data Viewer</a> <a href="index.php" class="" style="float:left;font-weight:bold;font-size:1.25em;padding-left:1.5em;padding-top:0.6em;padding-bottom:0.5em;text-decoration:none"> v22.9.13.3 | User: <?php echo $AccessUser; ?></a>
+				<a href="index.php" class="" style="float:left;font-weight:bold;font-size:1.75em;;padding-top:0.2em;padding-bottom:0.5em;text-decoration:none">Legacy EMR Data Viewer</a> <a href="index.php" class="" style="float:left;font-weight:bold;font-size:1.25em;padding-left:1.5em;padding-top:0.6em;padding-bottom:0.5em;text-decoration:none"> v<?php echo $SolutionVersion; ?> | User: <?php echo $AccessUser; ?></a>
 			</div>
 		</div>
 		<div class="content-wrapper" id="content-wrapper" style="top:auto">
 		<div class="pure-g"  style="margin-top:3em">
 		<div class="pure-u-1">
 		<div class=" cdaview"  id="inputcda" style="padding:1em;">
-			
-			<p></p>
+			<!-- <p></p> -->
 			<!-- START TABLE VIEW -->
 			<div class="table-wrapper-wrapper">
 				<div align="right">
-					<b style="float:right;">Patient Search: <input type="text" id="filterText" value="<?php echo $SearchFilter2 ?>"> <button type="button" id="filterSearch" class="pure-button" onclick="filterResults()">Search</button> <button type="button" class="pure-button" onclick="clearFilter()">Clear Filter</button></b>
+					<i style="float:right;">Please be patient after clicking on items, data may take some time to load.</i><br /><b style="float:right;">Patient Search: <input type="text" id="filterText" value="<?php echo $SearchFilter2 ?>"> <button type="button" id="filterSearch" class="pure-button" onclick="filterResults()">Search</button> <button type="button" class="pure-button" onclick="clearFilter()">Clear Filter</button></b>
 					<b style="float:left;">To begin, search for a patient and/or select a document listed below:</b>
 				</div>
-				
 				<div class="table-wrapper">
 					<table class="sortable" width="90%">
 						<thead>
@@ -83,6 +82,8 @@
 							</tr>
 						</thead>
 						<tbody><?php
+                            $pattern = "*$SearchFilter2*";
+                            if ($pattern != "**") {
                             //$SearchFilter2 = $_GET['SearchFilter2'];
                             // Adds pretty filesizes
                             function pretty_filesize($file)
@@ -136,7 +137,7 @@
     // Sorts files
     sort($dirArray);
 
-    $ResultsEmpty = FALSE;
+    $ResultsEmpty = false;
 
     // Loops through the array of files
     for ($index=0; $index < $indexCount; $index++) {
@@ -188,56 +189,56 @@
                 // Prettifies file type
                 switch ($extn) {
                     case "xml": $extn="CCDA Document";
-                    break;
+                        break;
                     case "png": $extn="PNG Image";
-                    break;
+                        break;
                     case "jpg": $extn="JPEG Image";
-                    break;
+                        break;
                     case "jpeg": $extn="JPEG Image";
-                    break;
+                        break;
                     case "svg": $extn="SVG Image";
-                    break;
+                        break;
                     case "gif": $extn="GIF Image";
-                    break;
+                        break;
                     case "ico": $extn="Windows Icon";
-                    break;
+                        break;
 
                     case "txt": $extn="Text File";
-                    break;
+                        break;
                     case "log": $extn="Log File";
-                    break;
+                        break;
                     case "htm": $extn="HTML File";
-                    break;
+                        break;
                     case "html": $extn="HTML File";
-                    break;
+                        break;
                     case "xhtml": $extn="HTML File";
-                    break;
+                        break;
                     case "shtml": $extn="HTML File";
-                    break;
+                        break;
                     case "php": $extn="PHP Script";
-                    break;
+                        break;
                     case "js": $extn="Javascript File";
-                    break;
+                        break;
                     case "css": $extn="Stylesheet";
-                    break;
+                        break;
 
                     case "pdf": $extn="PDF Document";
-                    break;
+                        break;
                     case "xls": $extn="Spreadsheet";
-                    break;
+                        break;
                     case "xlsx": $extn="Spreadsheet";
-                    break;
+                        break;
                     case "doc": $extn="Microsoft Word Document";
-                    break;
+                        break;
                     case "docx": $extn="Microsoft Word Document";
-                    break;
+                        break;
 
                     case "zip": $extn="ZIP Archive";
-                    break;
+                        break;
                     case "htaccess": $extn="Apache Config File";
-                    break;
+                        break;
                     case "exe": $extn="Windows Executable";
-                    break;
+                        break;
 
                     default: if ($extn!="") {
                         $extn=strtoupper($extn)." File";
@@ -261,25 +262,33 @@
                 if (stringMatchWithWildcard($name, $pattern) == 1) {
                     echo("
                             <tr class='$class'>
-                                <td><span style='width:75%;text-align:left' onclick='openDoc(\"$name\")' file=\"./CCDAs/$name\" class='pure-button transform'>$name</span></td>
+                                <td><span style='width:75%;text-align:left' onclick='openDoc(\"$name\",\"$SolutionVersion\")' file=\"./CCDAs/$name\" class='pure-button transform'>$name</span></td>
                                 <td>$extn</td>
                                 <!-- <td> <span onclick='loadtextarea(\"./CCDAs/$name\")' class='pure-button'>Show XML</span></td> -->
                             </tr>");
                 }
             } else {
-                $ResultsEmpty = TRUE;    
+                $ResultsEmpty = true;
             }
         }
     }
-    if ($ResultsEmpty == TRUE){
-    	LogAction("initially accessed the site or cleared the search filter");
+    if ($ResultsEmpty == true) {
+        LogAction("initially accessed the site or cleared the search filter");
         echo("
         <tr class='$class'>
             <td><span style='width:75%;text-align:left' class='pure-button'>The record list is hidden by default.  Use the search filter to locate specific patient records.</span></td>
             <td></td>
         </tr>");
     } else {
-        LogAction("searched for \"$SearchFilter2\"");
+    LogAction("searched for \"$SearchFilter2\"");
+}
+    } else {
+        LogAction("initially accessed the site or cleared the search filter");
+        echo("
+        <tr class='$class'>
+            <td><span style='width:75%;text-align:left' class='pure-button'>The record list is hidden by default.  Use the search filter to locate specific patient records.</span></td>
+            <td></td>
+        </tr>");
     }
     ?>
 						</tbody>
@@ -302,8 +311,10 @@
 				</div>-->
 		</div>
 		<div class=" cdaview"  id="viewcda">
-			<p></p>
+			<p></p><br />
 		</div>
+<br /><p> </p><p> </p><p> </p><p> </p>
+<br />
 		<div class="footer">
 			<p>Viewer site put together by <a href="http://visuafusion.com"><b>visuaFUSION Systems Solutions</b></a>, based upon the original HL7 C-CDA Viewer by <b>IntelSoft</b>.</p>
 		</div>
@@ -316,10 +327,10 @@
 			function clearFilter() {
 			    window.location.replace('index.php?SearchFilter2=');
 			}
-			function openDoc(LoadFile) {
+			function openDoc(LoadFile,SolutionVersion) {
 				$.ajax({
                                   method: "POST",
-                                  url: "./php/log.php?FileName=" + LoadFile,
+                                  url: "./php/log.php?FileName=" + LoadFile + "&SolutionVersion=" + SolutionVersion,
  				  data: { text: $("p.unbroken").text() }
                                 })
                                   .done(function( response ) {
@@ -333,6 +344,6 @@
     				document.getElementById('filterSearch').click();
   			}
 		});
-		</script>
+		</script><br />
 	</body>
 </html>
